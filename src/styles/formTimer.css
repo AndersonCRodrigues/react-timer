@@ -1,0 +1,17 @@
+form {
+  margin: 20px 0;
+}
+
+form label {
+  padding: 10px;
+  font-size: 2em;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+form select {
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
+  font-size: 0.8em;
+}

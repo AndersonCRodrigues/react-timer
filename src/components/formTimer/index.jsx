@@ -1,3 +1,5 @@
+import '../../styles/formTimer.css';
+
 export const FormTimer = ({ handleChange, start }) => {
 
   const arrHora = Array(11).fill('');

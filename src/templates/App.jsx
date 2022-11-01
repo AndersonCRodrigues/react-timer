@@ -65,41 +65,47 @@ export default class App extends React.Component {
   }
 
   handleAddSeconds = () => {
-    const { segundo } = this.state;
-    if ( segundo + 30 > 59) {
-      this.setState((prev) => ({
-        segundo: prev.segundo - 30,
-        minuto: prev.minuto + 1,
-      }))
-    } else {
-      this.setState((prev) => ({segundo: prev.segundo + 30}))
+    const { segundo, start } = this.state;
+    if(start) {
+      if ( segundo + 30 > 59) {
+        this.setState((prev) => ({
+          segundo: prev.segundo - 30,
+          minuto: prev.minuto + 1,
+        }))
+      } else {
+        this.setState((prev) => ({segundo: prev.segundo + 30}))
+      }
     }
   }
 
   handleAddMinute = () => {
-    const { minuto } = this.state;
-    if ( minuto + 1 > 59) {
-      this.setState((prev) => ({
-        minuto: prev.minuto - 59,
-        hora: prev.hora + 1,
-      }))
-    } else {
-      this.setState((prev) => ({minuto: prev.minuto + 1}))
+    const { minuto, start } = this.state;
+    if (start) {
+        if ( minuto + 1 > 59) {
+          this.setState((prev) => ({
+            minuto: prev.minuto - 59,
+            hora: prev.hora + 1,
+          }))
+        } else {
+          this.setState((prev) => ({minuto: prev.minuto + 1}))
+        }
+      }
     }
-  }
 
 
   render() {
     const { timer, start } = this.state
     return (
-      <div>
+      <main>
         <h1>Timer</h1>
-        <h1>{timer}</h1>
+        <h2>{timer}</h2>
         <FormTimer handleChange={this.handleChange} start={start} />
-        <button onClick={this.handleStartTimer}>Start</button>
-        <button onClick={this.handleAddSeconds}>+30 segundos</button>
-        <button onClick={this.handleAddMinute}>+1 minuto</button>
-      </div>
+        <div className='buttons'>
+          <button onClick={this.handleStartTimer}>Start</button>
+          <button onClick={this.handleAddSeconds}>+30 segundos</button>
+          <button onClick={this.handleAddMinute}>+1 minuto</button>
+        </div>
+      </main>
     )
   }
 }
