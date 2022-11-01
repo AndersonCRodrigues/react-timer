@@ -64,6 +64,30 @@ export default class App extends React.Component {
     this.setState({[name]: value});
   }
 
+  handleAddSeconds = () => {
+    const { segundo } = this.state;
+    if ( segundo + 30 > 59) {
+      this.setState((prev) => ({
+        segundo: prev.segundo - 30,
+        minuto: prev.minuto + 1,
+      }))
+    } else {
+      this.setState((prev) => ({segundo: prev.segundo + 30}))
+    }
+  }
+
+  handleAddMinute = () => {
+    const { minuto } = this.state;
+    if ( minuto + 1 > 59) {
+      this.setState((prev) => ({
+        minuto: prev.minuto - 59,
+        hora: prev.hora + 1,
+      }))
+    } else {
+      this.setState((prev) => ({minuto: prev.minuto + 1}))
+    }
+  }
+
 
   render() {
     const { timer, start } = this.state
@@ -73,6 +97,8 @@ export default class App extends React.Component {
         <h1>{timer}</h1>
         <FormTimer handleChange={this.handleChange} start={start} />
         <button onClick={this.handleStartTimer}>Start</button>
+        <button onClick={this.handleAddSeconds}>+30 segundos</button>
+        <button onClick={this.handleAddMinute}>+1 minuto</button>
       </div>
     )
   }
