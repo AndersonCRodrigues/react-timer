@@ -33,8 +33,15 @@ export default class App extends React.Component {
         minuto: 0,
         segundo: 0,
       }, (clearInterval(this.intervalId)));
-      sound.play();
+       sound.play();
     }
+  }
+
+  shouldComponentUpdate(_,next) {
+    if (next.minuto === -1) {
+      this.setState({minuto: 0 })
+    }
+    return true;
   }
 
   handleAtualizaTimer = () => {
@@ -42,8 +49,9 @@ export default class App extends React.Component {
     if (start) {
       this.intervalId = setInterval(() => {
         this.setState((prev) => ({
-          segundo: prev.segundo === 0 ? 59 : prev.segundo -1,
+          hora: prev.minuto === 0 && prev.segundo === 0 ? prev.hora - 1 : prev.hora,
           minuto: prev.segundo === 0 ? prev.minuto - 1 : prev.minuto,
+          segundo: prev.segundo === 0 ? 59 : prev.segundo -1,
           timer: (prev.hora > 9 ? prev.hora : '0' + prev.hora)
             + ':' + (prev.minuto > 9 ? prev.minuto : '0' + prev.minuto)
             + ':' + (prev.segundo > 9 ? prev.segundo : '0' + prev.segundo),
